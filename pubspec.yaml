@@ -1,0 +1,40 @@
+name: dumbdumb_flutter_app
+description: My dumbdumb Flutter app
+version: 1.0.0+1
+publish_to: none
+
+environment:
+  sdk: ">=2.17.0 <3.0.0"
+
+dependencies:
+  bloc: ^8.0.3
+  provider: ^6.0.3
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^8.0.1
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.17.0
+
+  # Device Info
+  device_info: ^2.0.0
+  package_info: ^2.0.0
+  store_redirect: ^2.0.1
+
+  # Data
+  dio: ^4.0.0
+  shared_preferences: ^2.0.5
+
+  # Firebase
+  firebase_core: ^1.17.1
+  firebase_analytics: ^9.1.9
+  firebase_messaging: ^11.4.1
+  firebase_crashlytics: ^2.8.1
+  firebase_remote_config: ^2.0.8
+
+  # Push Notification
+  flutter_local_notifications: ^5.0.0+3
+
+flutter:
+  uses-material-design: true
+  generate: true
