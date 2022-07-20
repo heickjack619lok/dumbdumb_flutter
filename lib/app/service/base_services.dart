@@ -94,7 +94,7 @@ class BaseServices {
       return response.statusCode == HttpStatus.ok;
     } catch (e) {
       if (e is DioError) {
-        e.response?.data = ErrorModel(e.response?.statusCode ?? HttpErrorCode.NONE, errorMessage: e.response?.statusMessage);
+        e.response?.data = ErrorModel(errorCode: e.response?.statusCode ?? HttpErrorCode.NONE, errorMessage: e.response?.statusMessage);
       }
       return e;
     }

@@ -1,29 +1,28 @@
 import 'package:dumbdumb_flutter_app/app/assets/constants.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class ErrorModel {
-  ErrorModel(this.errorCode,
-      {this.errorMessage,
-      this.errorCodeDescription,
-      this.error,
-      this.errorDescription});
+part 'error_model.freezed.dart';
+part 'error_model.g.dart';
 
-  ErrorModel.fromJson(Map<String, dynamic> json) {
-    errorCode = int.tryParse(json['errorCode'].toString()) ?? 0;
-    errorMessage = json['errorMessage'] != null ? json['errorMessage'].toString() : '';
-    errorCodeDescription = json['errorCodeDescription'] != null ? json['errorCodeDescription'].toString() : '';
-    error = json['error'] != null ? json['error'].toString() : '';
-    errorDescription = json['error_description'] != null ? json['error_description'].toString() : '';
-  }
+@freezed
+class ErrorModel with _$ErrorModel {
+  factory ErrorModel({
+    int? errorCode,
 
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['errorCode'] = errorCode;
-    data['errorMessage'] = errorMessage;
-    data['errorCodeDescription'] = errorCodeDescription;
-    data['error'] = error;
-    data['error_description'] = errorDescription;
-    return data;
-  }
+    /// error from api response failure
+    String? errorMessage,
+    String? errorCodeDescription,
+
+    /// error from server common failure
+    String? error,
+    String? errorDescription,
+  }) = _ErrorModel;
+
+  factory ErrorModel.fromJson(Map<String, dynamic> json) =>
+      _$ErrorModelFromJson(json);
+
+  /// A private constructor is needed to add getters
+  ErrorModel._();
 
   String? getErrorMessageTitle() {
     if (errorCodeDescription?.isNotEmpty == true) {
@@ -43,15 +42,7 @@ class ErrorModel {
     return null;
   }
 
-  int? errorCode;
-
-  /// error from api response failure
-  String? errorMessage;
-  String? errorCodeDescription;
-
-  /// error from server common failure
-  String? error;
-  String? errorDescription;
-
-  bool forbidden() => errorCode == HttpErrorCode.UNAUTHORIZED || errorCode == HttpErrorCode.FORBIDDEN;
+  bool forbidden() =>
+      errorCode == HttpErrorCode.UNAUTHORIZED ||
+      errorCode == HttpErrorCode.FORBIDDEN;
 }
