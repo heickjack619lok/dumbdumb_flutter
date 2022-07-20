@@ -1,21 +1,15 @@
-import 'package:dumbdumb_flutter_app/app/utils/util.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class TokenModel {
+part 'token_model.freezed.dart';
+part 'token_model.g.dart';
 
-  TokenModel({this.accessToken, this.refreshToken});
+@freezed
+class TokenModel with _$TokenModel {
+  factory TokenModel({
+    String? accessToken,
+    String? refreshToken,
+  }) = _TokenModel;
 
-  TokenModel.fromJson(Map<String, dynamic> json) {
-    accessToken = DynamicParsing(json['auth_token']).parseString();
-    refreshToken = DynamicParsing(json['refresh_token']).parseString();
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['auth_token'] = this.accessToken;
-    data['refresh_token'] = this.refreshToken;
-    return data;
-  }
-
-  String? accessToken;
-  String? refreshToken;
+  factory TokenModel.fromJson(Map<String, dynamic> json) =>
+      _$TokenModelFromJson(json);
 }
