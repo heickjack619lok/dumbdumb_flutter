@@ -1,0 +1,15 @@
+targets:
+  $default:
+    builders:
+      json_serializable:
+        options:
+          explicit_to_json: true
+          # TODO: Set your field name types
+          # field_rename: pascal
+      source_gen|combining_builder:
+        options:
+          ignore_for_file:
+            - implicit_dynamic_parameter
+            - lines_longer_than_80_chars
+            - non_constant_identifier_names
+            - require_trailing_commas
