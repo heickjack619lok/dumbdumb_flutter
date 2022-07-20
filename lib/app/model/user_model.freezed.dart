@@ -24,8 +24,10 @@ mixin _$UserModel {
   int? get gender => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
   String? get icNumber => throw _privateConstructorUsedError;
-  String? get fullName => throw _privateConstructorUsedError;
-  String? get createdDate => throw _privateConstructorUsedError;
+  String? get fullName =>
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
+  @JsonKey(name: 'createdDate')
+  String? get createdDateString => throw _privateConstructorUsedError;
   String? get phoneNumber => throw _privateConstructorUsedError;
   String? get accessToken => throw _privateConstructorUsedError;
   String? get refreshToken => throw _privateConstructorUsedError;
@@ -46,7 +48,7 @@ abstract class $UserModelCopyWith<$Res> {
       String? email,
       String? icNumber,
       String? fullName,
-      String? createdDate,
+      @JsonKey(name: 'createdDate') String? createdDateString,
       String? phoneNumber,
       String? accessToken,
       String? refreshToken});
@@ -67,7 +69,7 @@ class _$UserModelCopyWithImpl<$Res> implements $UserModelCopyWith<$Res> {
     Object? email = freezed,
     Object? icNumber = freezed,
     Object? fullName = freezed,
-    Object? createdDate = freezed,
+    Object? createdDateString = freezed,
     Object? phoneNumber = freezed,
     Object? accessToken = freezed,
     Object? refreshToken = freezed,
@@ -93,9 +95,9 @@ class _$UserModelCopyWithImpl<$Res> implements $UserModelCopyWith<$Res> {
           ? _value.fullName
           : fullName // ignore: cast_nullable_to_non_nullable
               as String?,
-      createdDate: createdDate == freezed
-          ? _value.createdDate
-          : createdDate // ignore: cast_nullable_to_non_nullable
+      createdDateString: createdDateString == freezed
+          ? _value.createdDateString
+          : createdDateString // ignore: cast_nullable_to_non_nullable
               as String?,
       phoneNumber: phoneNumber == freezed
           ? _value.phoneNumber
@@ -125,7 +127,7 @@ abstract class _$$_UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
       String? email,
       String? icNumber,
       String? fullName,
-      String? createdDate,
+      @JsonKey(name: 'createdDate') String? createdDateString,
       String? phoneNumber,
       String? accessToken,
       String? refreshToken});
@@ -148,7 +150,7 @@ class __$$_UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
     Object? email = freezed,
     Object? icNumber = freezed,
     Object? fullName = freezed,
-    Object? createdDate = freezed,
+    Object? createdDateString = freezed,
     Object? phoneNumber = freezed,
     Object? accessToken = freezed,
     Object? refreshToken = freezed,
@@ -174,9 +176,9 @@ class __$$_UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
           ? _value.fullName
           : fullName // ignore: cast_nullable_to_non_nullable
               as String?,
-      createdDate: createdDate == freezed
-          ? _value.createdDate
-          : createdDate // ignore: cast_nullable_to_non_nullable
+      createdDateString: createdDateString == freezed
+          ? _value.createdDateString
+          : createdDateString // ignore: cast_nullable_to_non_nullable
               as String?,
       phoneNumber: phoneNumber == freezed
           ? _value.phoneNumber
@@ -196,17 +198,18 @@ class __$$_UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_UserModel implements _UserModel {
+class _$_UserModel extends _UserModel {
   _$_UserModel(
       {this.id,
       this.gender,
       this.email,
       this.icNumber,
       this.fullName,
-      this.createdDate,
+      @JsonKey(name: 'createdDate') this.createdDateString,
       this.phoneNumber,
       this.accessToken,
-      this.refreshToken});
+      this.refreshToken})
+      : super._();
 
   factory _$_UserModel.fromJson(Map<String, dynamic> json) =>
       _$$_UserModelFromJson(json);
@@ -221,8 +224,10 @@ class _$_UserModel implements _UserModel {
   final String? icNumber;
   @override
   final String? fullName;
+// ignore: invalid_annotation_target
   @override
-  final String? createdDate;
+  @JsonKey(name: 'createdDate')
+  final String? createdDateString;
   @override
   final String? phoneNumber;
   @override
@@ -232,7 +237,7 @@ class _$_UserModel implements _UserModel {
 
   @override
   String toString() {
-    return 'UserModel(id: $id, gender: $gender, email: $email, icNumber: $icNumber, fullName: $fullName, createdDate: $createdDate, phoneNumber: $phoneNumber, accessToken: $accessToken, refreshToken: $refreshToken)';
+    return 'UserModel(id: $id, gender: $gender, email: $email, icNumber: $icNumber, fullName: $fullName, createdDateString: $createdDateString, phoneNumber: $phoneNumber, accessToken: $accessToken, refreshToken: $refreshToken)';
   }
 
   @override
@@ -246,7 +251,7 @@ class _$_UserModel implements _UserModel {
             const DeepCollectionEquality().equals(other.icNumber, icNumber) &&
             const DeepCollectionEquality().equals(other.fullName, fullName) &&
             const DeepCollectionEquality()
-                .equals(other.createdDate, createdDate) &&
+                .equals(other.createdDateString, createdDateString) &&
             const DeepCollectionEquality()
                 .equals(other.phoneNumber, phoneNumber) &&
             const DeepCollectionEquality()
@@ -264,7 +269,7 @@ class _$_UserModel implements _UserModel {
       const DeepCollectionEquality().hash(email),
       const DeepCollectionEquality().hash(icNumber),
       const DeepCollectionEquality().hash(fullName),
-      const DeepCollectionEquality().hash(createdDate),
+      const DeepCollectionEquality().hash(createdDateString),
       const DeepCollectionEquality().hash(phoneNumber),
       const DeepCollectionEquality().hash(accessToken),
       const DeepCollectionEquality().hash(refreshToken));
@@ -282,17 +287,18 @@ class _$_UserModel implements _UserModel {
   }
 }
 
-abstract class _UserModel implements UserModel {
+abstract class _UserModel extends UserModel {
   factory _UserModel(
       {final String? id,
       final int? gender,
       final String? email,
       final String? icNumber,
       final String? fullName,
-      final String? createdDate,
+      @JsonKey(name: 'createdDate') final String? createdDateString,
       final String? phoneNumber,
       final String? accessToken,
       final String? refreshToken}) = _$_UserModel;
+  _UserModel._() : super._();
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
       _$_UserModel.fromJson;
@@ -307,8 +313,9 @@ abstract class _UserModel implements UserModel {
   String? get icNumber;
   @override
   String? get fullName;
-  @override
-  String? get createdDate;
+  @override // ignore: invalid_annotation_target
+  @JsonKey(name: 'createdDate')
+  String? get createdDateString;
   @override
   String? get phoneNumber;
   @override
