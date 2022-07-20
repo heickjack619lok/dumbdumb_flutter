@@ -313,6 +313,10 @@ Update the `CFBundleLocalizations` array in the `Info.plist` at `ios/Runner/Info
 }
 ```
 
+## `fromJson` and `toJson`
+
+This template uses [freezed][freezed_link] to generate necessary `fromJson` constructors and `toJson` methods. See `lib/app/model/user_model.dart` for an example. Additionally, you may edit the `build.yaml` file if your parameters do not use `camelCase` (do take care of manual JsonKey names such as in `user_model.dart` if that is the case).
+
 ## Credits
 
 A big thanks and appreciation to the good work from [very_good_cli] teams, as this project is taking base reference from the sample project created using [very_good_cli]. We learn a lot from their outstanding "very good core" which support multi flavoring, localization and many more out of the box.
@@ -331,3 +335,4 @@ In this dumbdumb project, we are slimming down the package, applying various mod
 [Provider.Of]: https://docs.flutter.dev/development/data-and-backend/state-mgmt/simple#providerof
 [MVVM by Tech Madness]: https://medium.com/flutterworld/flutter-mvvm-architecture-f8bed2521958
 [very_good_cli]: https://github.com/VeryGoodOpenSource/very_good_cli
+[freezed_link]: https://pub.dev/packages/freezed
