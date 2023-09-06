@@ -1,6 +1,8 @@
-import 'package:dumbdumb_flutter_app/app/utils/util.dart';
+import 'package:dumbdumb_flutter_app/app/assets/exporter/importer_app_general.dart';
 
 class TokenModel {
+  String? accessToken;
+  String? refreshToken;
 
   TokenModel({this.accessToken, this.refreshToken});
 
@@ -10,12 +12,9 @@ class TokenModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['auth_token'] = this.accessToken;
-    data['refresh_token'] = this.refreshToken;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['auth_token'] = accessToken;
+    data['refresh_token'] = refreshToken;
     return data;
   }
-
-  String? accessToken;
-  String? refreshToken;
 }

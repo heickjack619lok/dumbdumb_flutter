@@ -1,18 +1,24 @@
-import 'package:dumbdumb_flutter_app/app/assets/constants.dart';
+import 'package:dumbdumb_flutter_app/app/assets/exporter/importer_app_general.dart';
 
 class ErrorModel {
-  ErrorModel(this.errorCode,
-      {this.errorMessage,
-      this.errorCodeDescription,
-      this.error,
-      this.errorDescription});
+  int? errorCode;
+
+  /// error from api response failure
+  String? errorMessage;
+  String? errorCodeDescription;
+
+  /// error from server common failure
+  String? error;
+  String? errorDescription;
+
+  ErrorModel(this.errorCode, {this.errorMessage, this.errorCodeDescription, this.error, this.errorDescription});
 
   ErrorModel.fromJson(Map<String, dynamic> json) {
     errorCode = int.tryParse(json['errorCode'].toString()) ?? 0;
-    errorMessage = json['errorMessage'] != null ? json['errorMessage'].toString() : '';
-    errorCodeDescription = json['errorCodeDescription'] != null ? json['errorCodeDescription'].toString() : '';
-    error = json['error'] != null ? json['error'].toString() : '';
-    errorDescription = json['error_description'] != null ? json['error_description'].toString() : '';
+    errorMessage = DynamicParsing(json['errorMessage']).parseString();
+    errorCodeDescription = DynamicParsing(json['errorCodeDescription']).parseString();
+    error = DynamicParsing(json['error']).parseString();
+    errorDescription = DynamicParsing(json['error_description']).parseString();
   }
 
   Map<String, dynamic> toJson() {
@@ -43,15 +49,5 @@ class ErrorModel {
     return null;
   }
 
-  int? errorCode;
-
-  /// error from api response failure
-  String? errorMessage;
-  String? errorCodeDescription;
-
-  /// error from server common failure
-  String? error;
-  String? errorDescription;
-
-  bool forbidden() => errorCode == HttpErrorCode.UNAUTHORIZED || errorCode == HttpErrorCode.FORBIDDEN;
+  bool forbidden() => errorCode == HttpErrorCode.unauthorized || errorCode == HttpErrorCode.forbidden;
 }

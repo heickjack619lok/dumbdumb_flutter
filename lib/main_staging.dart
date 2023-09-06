@@ -5,15 +5,13 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-import 'package:flutter/widgets.dart';
-import 'package:dumbdumb_flutter_app/app/utils/starter_handler.dart';
-import 'app/assets/app_options.dart';
+import 'app/assets/exporter/importer_app_general.dart';
+import 'app/utils/starter_handler.dart';
 import 'app/view/app.dart';
 
 Future<void> main() async {
-
   // An init() Function to perform all required initial configuration before app start running
-  await init(EnvironmentType.STAGING);
+  await init(EnvironmentType.staging);
 
   // Start to run the app
   runApp(const App());

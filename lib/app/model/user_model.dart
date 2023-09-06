@@ -1,24 +1,35 @@
+import 'package:dumbdumb_flutter_app/app/assets/exporter/importer_app_general.dart';
+
 class UserModel {
+  String? id;
+  int? gender;
+  String? email;
+  String? icNumber;
+  String? fullName;
+  String? createdDate;
+  String? phoneNumber;
+  String? accessToken;
+  String? refreshToken;
 
   UserModel(
       {this.id,
-        this.gender,
-        this.email,
-        this.fullName,
-        this.createdDate,
-        this.phoneNumber,
-        this.accessToken,
-        this.refreshToken});
+      this.gender,
+      this.email,
+      this.fullName,
+      this.createdDate,
+      this.phoneNumber,
+      this.accessToken,
+      this.refreshToken});
 
   UserModel.fromJson(Map<String, dynamic> json) {
-    id = getStringValue(json['id']);
-    email = getStringValue(json['email']);
-    icNumber = getStringValue(json['icNumber']);
-    accessToken = getStringValue(json['auth_token']);
-    refreshToken = getStringValue(json['refresh_token']);
-    fullName = getStringValue(json['fullName']);
-    phoneNumber = getStringValue(json['phoneNumber']);
-    createdDate = getStringValue(json['createdDate']);
+    id = DynamicParsing(json['id']).parseString();
+    email = DynamicParsing(json['email']).parseString();
+    icNumber = DynamicParsing(json['icNumber']).parseString();
+    accessToken = DynamicParsing(json['auth_token']).parseString();
+    refreshToken = DynamicParsing(json['refresh_token']).parseString();
+    fullName = DynamicParsing(json['fullName']).parseString();
+    phoneNumber = DynamicParsing(json['phoneNumber']).parseString();
+    createdDate = DynamicParsing(json['createdDate']).parseString();
     gender = int.tryParse(json['gender'].toString()) ?? 0;
   }
 
@@ -35,17 +46,4 @@ class UserModel {
     data['refresh_token'] = refreshToken;
     return data;
   }
-
-  String getStringValue(dynamic? jsonValue) =>
-      jsonValue != null ? jsonValue.toString() : '';
-
-  String? id;
-  int? gender;
-  String? email;
-  String? icNumber;
-  String? fullName;
-  String? createdDate;
-  String? phoneNumber;
-  String? accessToken;
-  String? refreshToken;
 }
