@@ -1,15 +1,10 @@
-
-import 'package:dumbdumb_flutter_app/app/utils/util.dart';
-import 'package:flutter/material.dart';
-import 'package:dumbdumb_flutter_app/app/model/error_model.dart';
-import 'package:dumbdumb_flutter_app/app/model/network/my_response.dart';
-import 'package:dumbdumb_flutter_app/app/viewmodel/login_view_model.dart';
-import 'package:dumbdumb_flutter_app/l10n/l10n.dart';
-import 'package:provider/provider.dart';
-
-import 'base_stateful_page.dart';
+import 'package:dumbdumb_flutter_app/app/assets/exporter/importer_app_screens.dart';
+import 'package:dumbdumb_flutter_app/app/assets/exporter/importer_app_structural_component.dart';
+import 'package:dumbdumb_flutter_app/app/assets/exporter/importer_app_general.dart';
 
 class LoginPage extends BaseStatefulPage {
+  const LoginPage({super.key});
+
   @override
   State<StatefulWidget> createState() => _LoginPageState();
 }
@@ -18,7 +13,6 @@ class LoginPage extends BaseStatefulPage {
 /// see also: [body], [floatingActionButton], [appbar]
 /// observable value [urgentError] needed to be obtained from ViewModel and set into [BaseStatefulState]
 class _LoginPageState extends BaseStatefulState<LoginPage> {
-
   /// observable value [urgentError] to be obtained from ViewModel class using [context.watch()]
   late ErrorModel urgentErrorObservable;
 
@@ -45,8 +39,7 @@ class _LoginPageState extends BaseStatefulState<LoginPage> {
 
   @override
   AppBar appbar() {
-    final l10n = context.l10n;
-    return AppBar(title: Text(l10n.loginTitle));
+    return AppBar(title: Text(str.loginTitle));
   }
 
   /// An abstract method that is compulsory to override to
@@ -65,11 +58,15 @@ class _LoginPageState extends BaseStatefulState<LoginPage> {
   Widget userInfoText(MyResponse response) {
     final theme = Theme.of(context);
 
-    switch(response.status) {
-      case ResponseStatus.LOADING: return Text("Loading data...", style: theme.textTheme.titleMedium);
-      case ResponseStatus.ERROR: return Text(response.error.toString(), style: theme.textTheme.bodySmall);
-      case ResponseStatus.COMPLETE: return Text(response.data, style: theme.textTheme.bodySmall);
-      default: return Text("Click the login button at the bottom to start", style: theme.textTheme.subtitle1);
+    switch (response.status) {
+      case ResponseStatus.loading:
+        return Text("Loading data...", style: theme.textTheme.titleMedium);
+      case ResponseStatus.error:
+        return Text(response.error.toString(), style: theme.textTheme.bodySmall);
+      case ResponseStatus.complete:
+        return Text(response.data, style: theme.textTheme.bodySmall);
+      default:
+        return Text("Click the login button at the bottom to start", style: theme.textTheme.titleMedium);
     }
   }
 }

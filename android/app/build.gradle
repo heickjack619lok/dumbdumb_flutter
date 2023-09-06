@@ -27,8 +27,8 @@ if (flutterMinSdkVersion == null) {
 }
 
 def flutterTargetSdkVersion = localProperties.getProperty('flutter.targetSdkVersion')
-if (flutterMinSdkVersion == null) {
-    flutterMinSdkVersion = 30
+if (flutterTargetSdkVersion == null) {
+    flutterTargetSdkVersion = 33
 }
 
 def keystoreProperties = new Properties()

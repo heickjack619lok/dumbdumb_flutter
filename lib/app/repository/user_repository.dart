@@ -1,6 +1,6 @@
 
-import 'package:dumbdumb_flutter_app/app/model/network/my_response.dart';
-import '../service/user_services.dart';
+
+import 'package:dumbdumb_flutter_app/app/assets/exporter/importer_app_structural_component.dart';
 
 /// Repository class is defining the business logic for accessing data source,
 /// eg:
@@ -9,7 +9,7 @@ import '../service/user_services.dart';
 /// 3. And many more
 class UserRepository {
 
-  UserServices _userServices = UserServices();
+  final UserServices _userServices = UserServices();
 
   Future<MyResponse> login(String username, String password) async {
     return await _userServices.login(username, password);
