@@ -1,4 +1,4 @@
-# Cool Flutter App
+# DumbDumb Flutter App
 
 [![License: MIT][license_badge]][license_link]
 
@@ -42,7 +42,7 @@ class ProductionConstant {
 }
 ```
 
-_\*Cool Flutter App works on iOS, Android
+DumbDumb Flutter App works on iOS, Android
 
 
 
@@ -143,6 +143,8 @@ Core concepts in [Provider]:
 2. [ChangeNotifierProvider]
 3. [Provider.Of]
 
+
+
 ### Using the Provider
 1. To simplified and standardize the usage of Provider in this project, a base class, base_view_model.dart is provided which extending the ChangeNotifier and include common functions/fields required. (eg: notify(), notifyUrgent() and more)
 2. ChangeNotifierProviders are implemented in the top inheritance level of the project (app.dart) which using MultiProvider to support multiple providers within the project.
@@ -160,6 +162,66 @@ MyResponse myResponse = Provider.of<LoginViewModel>(context).response;
 5. To access provider without listen for changes:
 ```dart
 Provider.of<LoginViewModel>(context, listen: false).login("60161234567", "Abcd1234")
+```
+
+
+
+## Routing with Go_Router
+This project using router to navigating between screens and handling deep links. [go_router](https://pub.dev/packages/go_router) package is used which can help to parse the route path and configure the Navigator whenever the app receives a new deep link. 
+
+### Declaring Routes
+1. `lib/app/assets/router/app_router.dart` is the main class to provide the configuration of the routes.
+2. For any new screens or new routes, you may add in the [GoRoute](https://pub.dev/documentation/go_router/latest/go_router/GoRoute-class.html) object into the [GoRouter](https://pub.dev/documentation/go_router/latest/go_router/GoRouter-class.html) constructor.
+
+#### GoRoute
+To configure a `GoRoute`, a path template and builder must be provided. Specifiy a path template to handle by providing a `path` parameter, and a builder by providing either the `builder` or `pageBuulder` parameter:
+
+```dart
+final GoRouter router = GoRouter(routes: [
+  GoRoute(path: '/login', builder: (context, state) => LoginPage())
+]);
+```
+
+#### Child Routes
+A matched route can result in more than one screen being displayed on a Nvigator. This is equivalent to calling `push()', where a new screen is displayed above the previous screen with a transition animation.
+
+To display a screen on top of another, add a child route by adding it to the parent route's `routes' list:
+```dart
+final GoRouter router = GoRouter(routes: [
+  GoRoute(path: '/login', builder: (context, state) => LoginPage()),
+  GoRoute(path: 'profile', builder: (context, state) => HomePage(initialIndex: 4), routes: [
+     GoRoute(
+	path: 'editProfile',
+	builder: (context, state) => EditBasicInfoPage(),
+	routes: [
+		GoRoute(path: 'changePhoneNumber', builder: (context, state) => ChangePhoneNumberPage())]),
+		GoRoute(path: 'changeLanguage', builder: (context, state) => LanguageListPage())
+     ])
+]);
+```
+
+### Navigation and Redirection
+#### Go directly to a destination
+Navigating to a destination in GoRouter will replace the current stack of screens with the screens configured to be displayed for the destination route. To change to a new screen, call `context.go()` with a URL:
+```dart
+context.go('/login');
+```
+
+#### Imperative navigation
+GoRouter can push a screen onto the Navigator's history stack using `context.push()`, and can pop the current screen via `context.pop()`. However, imperative navigation is known to cause issues with the browser history.
+
+#### Returning values
+You can wait for a value to be returned from the destination:
+
+Initial page:
+```dart
+await context.go('/login');
+if(result...) ...
+```
+
+Returning page:
+```dart
+context.pop(someResult);
 ```
 
 
